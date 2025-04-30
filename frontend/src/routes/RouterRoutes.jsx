@@ -11,9 +11,9 @@ import Feedback from "../pages/Feedback";
 import ResetPassword from "../components/resetPassword/ResetPassword";
 import PrivacyPolicy from "../pages/Privacy";
 import ContactUs from "../pages/ContactUs";
-import ImageAnalyzer from "../pages/ImageAnalyzer";
 import FindDietician from "../pages/FindDietician/FindDietician";
 import Features from "../pages/Features";
+import Analyzer from "../pages/Analyzer";
 const RouterRoutes = () => {
   useScrollRestore();
 
@@ -30,7 +30,7 @@ const RouterRoutes = () => {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/privacy" element= {<PrivacyPolicy/>} />
-        <Route path="/image-analysis" element= {<ImageAnalyzer/>} />
+        <Route path="/analysis" element= {<Analyzer/>} />
         <Route path="/find-doctor" element= {<FindDietician/>} />
         <Route path="/features" element= {<Features/>} />
       </Routes>

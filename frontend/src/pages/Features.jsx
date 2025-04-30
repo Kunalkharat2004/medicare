@@ -1,16 +1,15 @@
-import React from 'react'
+import React from "react";
 
 const Features = () => {
   return (
     <div style={{ height: "100vh", width: "100%" }}>
-    <iframe
+      <iframe
         src="https://rajkhanke-featuresandfunctionalities.static.hf.space"
         title="Streamlit App"
         style={{ width: "100%", height: "100%", border: "none" }}
-    />
-</div>
-
-  )
-}
+      />
+    </div>
+  );
+};
 
 export default Features;

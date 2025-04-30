@@ -417,7 +417,7 @@ const Home = () => {
       )}
 
       {isDoctor && (
-        <div className="mx-auto w-[93vw] max-w-[1100px] relative border-2 border-blue-2 rounded-[8px] mb-12 transition-all duration-400 ease-in-out hover:max-w-[1120px] hover:w-[95vw] hover:border-[3px]  hover:border-blue-4 py-12 px-[10px] max-xs:py-14 max-xs:px-[10px] hover:py-14">
+        <div className="mx-auto w-[93vw] max-w-[1100px] relative border-2 border-blue-2 rounded-[8px] mb-12 transition-all duration-400 ease-in-out hover:border-blue-4 py-12 px-[10px] max-xs:py-14 max-xs:px-[10px] ">
           <div className="absolute inset-0 bg-[url('/search_patients.png')] bg-center bg-no-repeat bg-cover -z-10 blur-[1px]"></div>
           <div className="flex justify-around items-center">
             <div className="text-blue-8 flex flex-wrap items-end">
@@ -445,7 +445,7 @@ const Home = () => {
             {completedMeets.map((item, index) => (
               <li
                 key={index}
-                className="border-1 border-blue-4 flex justify-between items-center p-2 px-4 mb-4 bg-blue-2 rounded-lg transition-all duration-300 hover:p-4 hover:border-2 hover:border-blue-5 hover:py-[0.7rem] hover:px-4"
+                className="border border-blue-4 flex justify-between items-center p-4 mb-4 bg-blue-2 rounded-lg transition-all duration-300 hover:border-blue-5 hover:shadow-md"
               >
                 <div className="text-blue-8 flex flex-wrap items-end">
                   <p className="text-[1.2em] mr-2">
@@ -477,7 +477,7 @@ const Home = () => {
               </li>
             ))}
             {completedMeets.length === 0 && (
-              <li className="flex justify-between items-center py-2 px-4 mb-4 bg-blue-2 rounded-lg border-1 border-blue-4 transition-all duration-300 ease-in-out hover:border-2 hover:border-blue-5 hover:py-[0.7rem] hover:px-4">
+              <li className="flex justify-between items-center p-4 mb-4 bg-blue-2 rounded-lg border border-blue-4 transition-all duration-300 hover:border-blue-5 hover:shadow-md">
                 <div className="text-blue-8">No history found...</div>
                 {!isDoctor && (
                   <button
@@ -500,7 +500,7 @@ const Home = () => {
             {upcomingAppointments.map((item, index) => (
               <li
                 key={index}
-                className="border-1 border-blue-4 flex justify-between items-center p-2 px-4 mb-4 bg-blue-2 rounded-lg transition-all duration-300 hover:p-4 hover:border-2 hover:border-blue-5 hover:py-[0.7rem] hover:px-4"
+                className="border border-blue-4 flex justify-between items-center p-4 mb-4 bg-blue-2 rounded-lg transition-all duration-300 hover:border-blue-5 hover:shadow-md"
               >
                 <div className="text-blue-8 flex flex-wrap items-end">
                   <p className="text-[1.2em] mr-2">
@@ -531,7 +531,7 @@ const Home = () => {
               </li>
             ))}
             {upcomingAppointments.length === 0 && (
-              <li className="flex justify-between items-center py-2 px-4 mb-4 bg-blue-2 rounded-lg border-1 border-blue-4 transition-all duration-300 ease-in-out hover:border-2 hover:border-blue-5 hover:py-[0.7rem] hover:px-4">
+              <li className="flex justify-between items-center p-4 mb-4 bg-blue-2 rounded-lg border border-blue-4 transition-all duration-300 hover:border-blue-5 hover:shadow-md">
                 <div className="text-blue-8">No appointments found...</div>
                 {!isDoctor && (
                   <button
@@ -547,7 +547,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="mx-auto w-[93vw] max-w-[1100px] bg-[#eedfa3] border-2 border-[#ff5500] p-6 text-[#ff5500] rounded-lg mb-20 transition-all duration-300 hover:w-[95vw] hover:p-8 hover:border-3">
+      <div className="mx-auto w-[93vw] max-w-[1100px] bg-[#f3dea3] border-2 border-[#ff5500] p-6 text-[#ff5500] rounded-lg mb-20 transition-all duration-300 hover:border-3">
         <div className="flex items-center mb-4 text-[#ff5900]">
           <HiOutlineLightBulb className="text-4xl mr-2" />
           <h2>Healthy Fact of the Day</h2>

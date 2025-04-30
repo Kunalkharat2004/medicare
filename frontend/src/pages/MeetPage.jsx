@@ -162,11 +162,19 @@ const MeetPage = () => {
         cleanupMeetStatus();
         setMeetEnded(true);
         toggleFeedback(true);
+        if (!isDoctor) {
+          window.location.href =
+            "https://rajkhanke-medical-plan-generator.hf.space";
+        }
       })
       .catch(() => {
         cleanupMeetStatus();
         setMeetEnded(true);
         toggleFeedback(true);
+        if (!isDoctor) {
+          window.location.href =
+            "https://rajkhanke-medical-plan-generator.hf.space";
+        }
       });
   };
 
@@ -174,6 +182,10 @@ const MeetPage = () => {
     cleanupMeetStatus();
     setMeetEnded(true);
     toggleFeedback(true);
+    if (!isDoctor) {
+      window.location.href =
+        "https://rajkhanke-medical-plan-generator.hf.space";
+    }
   };
 
   const renderSpinner = () => (

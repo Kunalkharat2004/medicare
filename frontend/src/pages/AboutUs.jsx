@@ -7,8 +7,8 @@ const AboutUs = () => {
   const projectAdmins = [
     
     {
-      name: "Pratik Mane",
-      role: "Web Developer",
+      name: "Kanad Kolhe",
+      role: "Backend Developer",
       avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSle5CxW6QjBz4FH6p5szdloz2gPoQLJ8Outg&s"
     },
     {
@@ -26,24 +26,6 @@ const AboutUs = () => {
       role: "AI/ML Developer",
       avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSle5CxW6QjBz4FH6p5szdloz2gPoQLJ8Outg&s"
     },
-  ];
-
-  const projectAdmins2 = [
-    {
-      name: "Pranit Chilbule",
-      role: "AI/ML Developer",
-      avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSle5CxW6QjBz4FH6p5szdloz2gPoQLJ8Outg&s"
-    },
-    {
-      name: "Aditya Adaki",
-      role: "AI/ML Developer",
-      avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSle5CxW6QjBz4FH6p5szdloz2gPoQLJ8Outg&s"
-    },
-    {
-      name: "Prasad Khambadkar",
-      role: "AI/ML Developer",
-      avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSle5CxW6QjBz4FH6p5szdloz2gPoQLJ8Outg&s"
-    }
   ];
 
   const pandemicFeatures = [
@@ -156,26 +138,6 @@ const AboutUs = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {projectAdmins.map((admin) => (
-              <div key={admin.name} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group">
-                <div className="text-center">
-                  <div className="w-full aspect-square max-w-[200px] mx-auto mb-6">
-                    <img 
-                      src={admin.avatar} 
-                      alt={admin.name}
-                      className="w-full h-full rounded-2xl object-cover transform group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2">{admin.name}</h3>
-                  <span className="inline-block px-4 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">
-                    {admin.role}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center justify-center">
-            {projectAdmins2.map((admin) => (
               <div key={admin.name} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group">
                 <div className="text-center">
                   <div className="w-full aspect-square max-w-[200px] mx-auto mb-6">

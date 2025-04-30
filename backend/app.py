@@ -122,8 +122,8 @@ def register():
         image_file = request.files['profile_picture']
         if image_file and image_file.filename:
             try:
-        cloudinary_url = upload_file(image_file) 
-        print("cloud_url", cloudinary_url)
+                cloudinary_url = upload_file(image_file) 
+                print("cloud_url", cloudinary_url)
                 if not cloudinary_url or not cloudinary_url.startswith('http'):
                     print(f"Cloudinary upload failed with response: {cloudinary_url}")
                     # Continue with registration but without profile picture
@@ -727,7 +727,7 @@ def meet_status():
     usertype = data.get('usertype', 'doctor')  # Default to doctor for backward compatibility
     
     if usertype == 'doctor':
-    details = doctors.find_one({'email': user})
+        details = doctors.find_one({'email': user})
         if not details:
             return jsonify({'error': 'Doctor not found'}), 404
             
@@ -736,17 +736,17 @@ def meet_status():
                 'message': 'Doctor is already in a meet', 
                 'link': details.get('link', {}).get('link', '') if isinstance(details.get('link'), dict) else details.get('link', '')
             }), 208
-    else:
-        if data.get('link', '') == '':
-            doctors.update_one({'email': user}, {'$set': {'meet': True}})
         else:
+            if data.get('link', '') == '':
+                doctors.update_one({'email': user}, {'$set': {'meet': True}})
+            else:
                 link_data = data.get('link', '')
                 # Standardize link storage format
                 if isinstance(link_data, dict):
                     doctors.update_one({'email': user}, {'$set': {'meet': True, 'link': link_data}})
                 else:
                     doctors.update_one({'email': user}, {'$set': {'meet': True, 'link': {'link': link_data, 'name': 'Patient'}}})
-        return jsonify({'message': 'Doctor status updated successfully'}), 200
+            return jsonify({'message': 'Doctor status updated successfully'}), 200
     else:  # Patient
         details = patients.find_one({'email': user})
         if not details:
@@ -771,11 +771,21 @@ def delete_meet():
     usertype = data.get('usertype', 'doctor')  # Default to doctor for backward compatibility
     
     if usertype == 'doctor':
-    doctors.update_one({'email': email}, {'$unset': {'link': None, 'currentlyInMeet': None}})
-    doctors.update_one({'email': email}, {'$set': {'meet': False}})
+        doctors.update_one(
+            {'email': email}, 
+            {
+                '$unset': {'link': None, 'currentlyInMeet': None},
+                '$set': {'meet': False}
+            }
+        )
     else:  # Patient
-        patients.update_one({'email': email}, {'$unset': {'link': None}})
-        patients.update_one({'email': email}, {'$set': {'meet': False}})
+        patients.update_one(
+            {'email': email}, 
+            {
+                '$unset': {'link': None},
+                '$set': {'meet': False}
+            }
+        )
 
     return jsonify({'message': 'Meet link deleted successfully'}), 200
 

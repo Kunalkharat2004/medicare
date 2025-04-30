@@ -221,7 +221,7 @@ const Header = () => {
                     }`}
                   >
                     <span
-                      onClick={() => navigate("/image-analysis")}
+                      onClick={() => navigate("/analysis")}
                       className="cursor-pointer font-bold"
                     >
                       ANALYSIS
