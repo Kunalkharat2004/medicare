@@ -220,6 +220,7 @@ const Header = () => {
                       </span>
                     </div>
                   )}
+
                   {localStorage.getItem("usertype") === "patient" && (
                     <div
                       className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
@@ -236,6 +237,25 @@ const Header = () => {
                       </span>
                     </div>
                   )}
+                  {localStorage.getItem("usertype") === "patient" && (
+                    <div
+                      className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 min-w-[160px] whitespace-nowrap ${
+                        curPath === "/medical-diagnosis"
+                          ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
+                          : "dark:text-white-1 text-blue-8"
+                      }`}
+                    >
+                      <a
+                        href="https://rajkhanke-medical-diagnosis-assistant.hf.space/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cursor-pointer font-bold w-full"
+                      >
+                        MEDICAL DIAGNOSIS
+                      </a>
+                    </div>
+                  )}
+
                   {localStorage.getItem("usertype") === "patient" && (
                     <div
                       className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
@@ -410,6 +430,26 @@ const Header = () => {
 
                         {localStorage.getItem("usertype") === "patient" && (
                           <div
+                            className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center whitespace-nowrap min-w-[180px] ${
+                              curPath === "/medical-diagnosis"
+                                ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
+                                : "dark:text-white-1 text-blue-8"
+                            }`}
+                          >
+                            <a
+                              href="https://rajkhanke-medical-diagnosis-assistant.hf.space/"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="cursor-pointer font-bold text-center w-full"
+                              onClick={() => setSideBarOpen(false)}
+                            >
+                              MEDICAL DIAGNOSIS
+                            </a>
+                          </div>
+                        )}
+
+                        {localStorage.getItem("usertype") === "patient" && (
+                          <div
                             className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center ${
                               curPath === "/analysis"
                                 ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
@@ -425,26 +465,6 @@ const Header = () => {
                             >
                               ANALYSIS
                             </span>
-                          </div>
-                        )}
-
-                        {localStorage.getItem("usertype") === "patient" && (
-                          <div
-                            className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center whitespace-nowrap ${
-                              curPath === "/medical-diagnosis"
-                                ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
-                                : "dark:text-white-1 text-blue-8"
-                            }`}
-                          >
-                            <a
-                              href="https://rajkhanke-medical-diagnosis-assistant.hf.space/"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="cursor-pointer font-bold text-center w-full"
-                              onClick={() => setSideBarOpen(false)}
-                            >
-                              DIAGNOSIS
-                            </a>
                           </div>
                         )}
 
