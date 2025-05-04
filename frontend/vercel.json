@@ -6,10 +6,6 @@
   "devCommand": "npm run dev",
   "outputDirectory": "dist",
   "framework": "vite",
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/[^.]+", "dest": "/", "status": 200 }
-  ],
   "headers": [
     {
       "source": "/(.*)",
