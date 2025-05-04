@@ -214,38 +214,55 @@ const Header = () => {
                   )}
                   {localStorage.getItem("usertype") === "patient" && (
                     <div
-                    className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
-                      curPath === "/about"
-                        ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
-                        : "dark:text-white-1 text-blue-8"
-                    }`}
-                  >
-                    <span
-                      onClick={() => navigate("/analysis")}
-                      className="cursor-pointer font-bold"
+                      className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 whitespace-nowrap max-md:text-[0.85em] max-sm:text-[0.8em]`}
                     >
-                      ANALYSIS
-                    </span>
-                  </div>
+                      <a
+                        href="https://rajkhanke-medical-diagnosis-assistant.hf.space/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cursor-pointer font-bold whitespace-nowrap text-center w-full"
+                        style={{ lineHeight: 1 }}
+                        onClick={() => setSideBarOpen((prev) => !prev)}
+                      >
+                        MEDICAL DIAGNOSIS
+                      </a>
+                    </div>
                   )}
 
                   {localStorage.getItem("usertype") === "patient" && (
                     <div
-                    className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
-                      curPath === "/about"
-                        ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
-                        : "dark:text-white-1 text-blue-8"
-                    }`}
-                  >
-                    <span
-                      onClick={() => navigate("/features")}
-                      className="cursor-pointer font-bold"
+                      className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 whitespace-nowrap max-md:text-[0.85em] max-sm:text-[0.8em]`}
                     >
-                      FEATURES
-                    </span>
-                  </div>
+                      <a
+                        href="https://rajkhanke-medical-diagnosis-assistant.hf.space/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cursor-pointer font-bold whitespace-nowrap text-center w-full"
+                        style={{ lineHeight: 1 }}
+                        onClick={() => setSideBarOpen((prev) => !prev)}
+                      >
+                        MEDICAL DIAGNOSIS
+                      </a>
+                    </div>
                   )}
-                  
+
+                  {localStorage.getItem("usertype") === "patient" && (
+                    <div
+                      className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
+                        curPath === "/about"
+                          ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
+                          : "dark:text-white-1 text-blue-8"
+                      }`}
+                    >
+                      <span
+                        onClick={() => navigate("/features")}
+                        className="cursor-pointer font-bold"
+                      >
+                        FEATURES
+                      </span>
+                    </div>
+                  )}
+
                   <div
                     className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
                       curPath === "/about"
@@ -260,7 +277,6 @@ const Header = () => {
                       ABOUT
                     </span>
                   </div>
-
 
                   {/* Account Dropdown */}
                   <div
@@ -310,7 +326,7 @@ const Header = () => {
                           >
                             Logout
                           </button>
-                                                 </div>
+                        </div>
                       </div>
                     )}
                   </div>
