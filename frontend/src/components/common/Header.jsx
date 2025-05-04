@@ -38,9 +38,22 @@ const Header = () => {
     window.addEventListener("scroll", handleIsSticky);
     window.addEventListener("scroll", handleIsScrolled);
 
+    // Add event listener to close dropdown when clicking outside
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setSideBarOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       window.removeEventListener("scroll", handleIsSticky);
       window.removeEventListener("scroll", handleIsScrolled);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isSticky, isScrolled]);
 
@@ -51,11 +64,6 @@ const Header = () => {
 
   const dropdownRef = useRef();
   const sidebarRef = useRef();
-
-  useOutsideClose(dropdownRef, () => {
-    setShowDropdown(false);
-  });
-  useOutsideClose(sidebarRef, () => setSideBarOpen(false));
 
   const handleLoginClick = () => {
     setIsSignup(false);
@@ -119,13 +127,13 @@ const Header = () => {
         )}
       <header
         id=""
-        className={`z-[999] w-full text-blue-8 md:px-8 pt-6 pb-6 transition-colors duration-0 ease-linear h-full bg-[#f5f5f5] dark:text-white-1 ${
+        className={`z-[1000] w-full text-blue-8 md:px-8 pt-6 pb-6 transition-colors duration-0 ease-linear h-full bg-[#f5f5f5] dark:text-white-1 overflow-x-hidden ${
           isSticky
             ? "top-0 sticky bg-blue-1 dark:bg-black-2"
             : "dark:bg-black-6 "
         } `}
       >
-        <div className="max-w-[1440px] mx-auto max-sm:px-2 px-6 max-xl:max-w-[1280px] max-lg:max-w-[1024px] max-md:max-w-[768px] max-sm:max-w-full h-full">
+        <div className="max-w-[1440px] mx-auto max-sm:px-2 px-6 max-xl:max-w-[1280px] max-lg:max-w-[1024px] max-md:max-w-[768px] max-sm:max-w-full h-full overflow-x-hidden relative">
           <div className="grid grid-cols-12 md:gap-4 max-sm:w-full">
             <h2 className="flex items-center col-span-7 max-lg:col-span-5 max-md:col-span-6 max-sm:col-span-6 max-md:mt-1">
               <Link to="/">
@@ -177,12 +185,12 @@ const Header = () => {
                 <nav
                   className={`hidden md:flex items-center ${
                     localStorage.getItem("usertype") == "doctor"
-                      ? " xl:ml-32 lg:gap-8 max-lg:gap-7"
-                      : "gap-8 max-lg:gap-7"
+                      ? "xl:ml-32 lg:gap-6 max-lg:gap-5"
+                      : "gap-5 max-lg:gap-4"
                   }`}
                 >
                   <div
-                    className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
+                    className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
                       curPath === "/home"
                         ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
                         : "dark:text-white-1 text-blue-8"
@@ -198,7 +206,7 @@ const Header = () => {
 
                   {localStorage.getItem("usertype") === "patient" && (
                     <div
-                      className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
+                      className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
                         curPath === "/doctors"
                           ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
                           : "dark:text-white-1 text-blue-8"
@@ -214,42 +222,24 @@ const Header = () => {
                   )}
                   {localStorage.getItem("usertype") === "patient" && (
                     <div
-                      className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 whitespace-nowrap max-md:text-[0.85em] max-sm:text-[0.8em]`}
+                      className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
+                        curPath === "/analysis"
+                          ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
+                          : "dark:text-white-1 text-blue-8"
+                      }`}
                     >
-                      <a
-                        href="https://rajkhanke-medical-diagnosis-assistant.hf.space/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="cursor-pointer font-bold whitespace-nowrap text-center w-full"
-                        style={{ lineHeight: 1 }}
-                        onClick={() => setSideBarOpen((prev) => !prev)}
+                      <span
+                        onClick={() => navigate("/analysis")}
+                        className="cursor-pointer font-bold"
                       >
-                        MEDICAL DIAGNOSIS
-                      </a>
+                        ANALYSIS
+                      </span>
                     </div>
                   )}
-
                   {localStorage.getItem("usertype") === "patient" && (
                     <div
-                      className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 whitespace-nowrap max-md:text-[0.85em] max-sm:text-[0.8em]`}
-                    >
-                      <a
-                        href="https://rajkhanke-medical-diagnosis-assistant.hf.space/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="cursor-pointer font-bold whitespace-nowrap text-center w-full"
-                        style={{ lineHeight: 1 }}
-                        onClick={() => setSideBarOpen((prev) => !prev)}
-                      >
-                        MEDICAL DIAGNOSIS
-                      </a>
-                    </div>
-                  )}
-
-                  {localStorage.getItem("usertype") === "patient" && (
-                    <div
-                      className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
-                        curPath === "/about"
+                      className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
+                        curPath === "/features"
                           ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
                           : "dark:text-white-1 text-blue-8"
                       }`}
@@ -264,7 +254,7 @@ const Header = () => {
                   )}
 
                   <div
-                    className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
+                    className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
                       curPath === "/about"
                         ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
                         : "dark:text-white-1 text-blue-8"
@@ -280,7 +270,7 @@ const Header = () => {
 
                   {/* Account Dropdown */}
                   <div
-                    className="relative hover:text-blue-9  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 text-blue-8 dark:text-white-1 dark:hover:text-blue-2 "
+                    className="relative hover:text-blue-9 transition-all duration-300 text-[0.9em] pt-[13px] pb-2 text-blue-8 dark:text-white-1 dark:hover:text-blue-2"
                     ref={dropdownRef}
                   >
                     <span
@@ -290,22 +280,24 @@ const Header = () => {
                       ACCOUNT
                     </span>
                     {showDropdown && (
-                      <div className="absolute top-[5rem] right-0 w-[17rem] bg-blue-6 p-6 text-[0.9rem] rounded-[3px] text-[#eee] border-[1px] border-grey-3 z-50 transition-all duration-200 ease-in-out dark:bg-blue-31">
-                        <div>
-                          <h4 className="font-semibold space-x-[0.5px]  text-blue-2">
-                            <span className=" text-[1em] opacity-95 hover:opacity-100 text-white-1">
-                              Hello! &nbsp;
-                            </span>
-                            <span className="dark:text-white-1/75">
-                              {localStorage.getItem("username")}
-                            </span>
-                          </h4>
-                          <p className="text-[0.8rem] mt-2">
-                            Have a great health!!
-                          </p>
+                      <div
+                        className={`fixed top-[8rem] right-[12%] lg:right-[8%] md:right-[5%] w-[17rem] bg-blue-6 p-6 text-[0.9rem] rounded-[3px] text-[#eee] border-[1px] border-grey-3 z-[100] transition-all duration-200 ease-in-out shadow-md dark:bg-blue-31 max-md:hidden`}
+                      >
+                        <h4 className="font-semibold space-x-[0.5px] text-blue-2">
+                          <span className="text-[1em] opacity-95 hover:opacity-100 text-white-1">
+                            Hello! &nbsp;
+                          </span>
+                          <span className="dark:text-white-1/75">
+                            {localStorage.getItem("username")}
+                          </span>
+                        </h4>
+                        <p className="text-[0.8rem] mt-2">
+                          Have a great health!!
+                        </p>
+                        <div className="flex flex-wrap gap-2 mt-4">
                           <button
                             type="button"
-                            className="mt-4 py-[0.8rem] px-4 rounded-[4px] border-[1px]  transition-all duration-300 hover:text-blue-1 hover:border-blue-5 hover:bg-blue-5 text-blue-1 border-blue-3 mr-[10px] bg-blue-3"
+                            className="py-[0.8rem] px-4 rounded-[4px] border-[1px] transition-all duration-300 hover:text-blue-1 hover:border-blue-5 hover:bg-blue-5 text-blue-1 border-blue-3"
                             onClick={() => {
                               setShowDropdown(false);
                               toggleProfile(true);
@@ -315,7 +307,7 @@ const Header = () => {
                           </button>
                           <button
                             type="button"
-                            className="mt-4 py-[0.8rem] px-4 rounded-[4px] border-[1px]  transition-all duration-300 hover:text-blue-1 hover:border-blue-5 hover:bg-blue-5 text-blue-1 border-blue-3 mr-[10px]"
+                            className="py-[0.8rem] px-4 rounded-[4px] border-[1px] transition-all duration-300 hover:text-blue-1 hover:border-blue-5 hover:bg-blue-5 text-blue-1 border-blue-3"
                             onClick={() => {
                               setShowDropdown(false);
                               localStorage.getItem("usertype") === "doctor"
@@ -333,7 +325,7 @@ const Header = () => {
                   <div className="rounded-full cursor-pointer flex justify-end items-center relative -left-2">
                     {isDarkMode ? (
                       <FaSun
-                        className=" w-7 h-7 max-sm:w-6 max-sm:h-6 text-white-1  hidden dark:block bg-blue-8 p-[0.3rem] max-sm:p-1 rounded-full align-middle dark:bg-blue-25 dark:text-white-1"
+                        className="w-7 h-7 max-sm:w-6 max-sm:h-6 text-white-1 hidden dark:block bg-blue-8 p-[0.3rem] max-sm:p-1 rounded-full align-middle dark:bg-blue-25 dark:text-white-1"
                         onClick={toggleDarkMode}
                       />
                     ) : (
@@ -379,7 +371,7 @@ const Header = () => {
                     >
                       <nav className="absolute flex flex-col top-[30px] right-0 gap-6 bg-blue-1 z-[99] py-4 px-20 rounded-[20px] dark:bg-gray-800">
                         <div
-                          className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center ${
+                          className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center ${
                             curPath === "/home"
                               ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
                               : "dark:text-white-1 text-blue-8"
@@ -396,8 +388,88 @@ const Header = () => {
                           </span>
                         </div>
 
+                        {localStorage.getItem("usertype") === "patient" && (
+                          <div
+                            className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center ${
+                              curPath === "/doctors"
+                                ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
+                                : "dark:text-white-1 text-blue-8"
+                            }`}
+                          >
+                            <span
+                              onClick={() => {
+                                navigate("/doctors");
+                                setSideBarOpen((prev) => !prev);
+                              }}
+                              className="cursor-pointer font-bold text-center w-full"
+                            >
+                              DOCTORS
+                            </span>
+                          </div>
+                        )}
+
+                        {localStorage.getItem("usertype") === "patient" && (
+                          <div
+                            className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center ${
+                              curPath === "/analysis"
+                                ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
+                                : "dark:text-white-1 text-blue-8"
+                            }`}
+                          >
+                            <span
+                              onClick={() => {
+                                navigate("/analysis");
+                                setSideBarOpen((prev) => !prev);
+                              }}
+                              className="cursor-pointer font-bold text-center w-full"
+                            >
+                              ANALYSIS
+                            </span>
+                          </div>
+                        )}
+
+                        {localStorage.getItem("usertype") === "patient" && (
+                          <div
+                            className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center whitespace-nowrap ${
+                              curPath === "/medical-diagnosis"
+                                ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
+                                : "dark:text-white-1 text-blue-8"
+                            }`}
+                          >
+                            <a
+                              href="https://rajkhanke-medical-diagnosis-assistant.hf.space/"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="cursor-pointer font-bold text-center w-full"
+                              onClick={() => setSideBarOpen(false)}
+                            >
+                              DIAGNOSIS
+                            </a>
+                          </div>
+                        )}
+
+                        {localStorage.getItem("usertype") === "patient" && (
+                          <div
+                            className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center ${
+                              curPath === "/features"
+                                ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
+                                : "dark:text-white-1 text-blue-8"
+                            }`}
+                          >
+                            <span
+                              onClick={() => {
+                                navigate("/features");
+                                setSideBarOpen((prev) => !prev);
+                              }}
+                              className="cursor-pointer font-bold text-center w-full"
+                            >
+                              FEATURES
+                            </span>
+                          </div>
+                        )}
+
                         <div
-                          className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center ${
+                          className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center ${
                             curPath === "/about"
                               ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
                               : "dark:text-white-1 text-blue-8"
@@ -415,12 +487,12 @@ const Header = () => {
                         </div>
 
                         <div
-                          className={`hover:text-blue-9 content-none  transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center text-blue-8 dark:text-white-1`}
+                          className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center text-blue-8 dark:text-white-1`}
                         >
                           <span
-                            className=" font-bold text-center w-full"
+                            className="font-bold text-center w-full"
                             onClick={() => {
-                              setSideBarOpen((prev) => !prev);
+                              setSideBarOpen(false);
                               setShowDropdown(true);
                             }}
                           >
@@ -431,43 +503,45 @@ const Header = () => {
                     </div>
                     {showDropdown && (
                       <div
-                        className={`absolute top-[4rem] right-0 w-[17rem] bg-blue-6 p-6 text-[0.9rem] rounded-[3px] text-[#eee] border-[1px] border-grey-3  z-50 transition-all duration-200 ease-in-out8 ${
-                          showDropdown && "active"
-                        }`}
+                        className={`fixed top-[4rem] right-2 w-[17rem] bg-blue-6 p-6 text-[0.9rem] rounded-[3px] text-[#eee] border-[1px] border-grey-3 z-[100] transition-all duration-200 ease-in-out shadow-md dark:bg-blue-31 md:hidden`}
                         ref={dropdownRef}
                       >
-                        <h4 className="font-semibold space-x-[0.5px]  text-blue-2">
-                          <span className=" text-[1em] opacity-95 hover:opacity-100 text-white-1">
+                        <h4 className="font-semibold space-x-[0.5px] text-blue-2">
+                          <span className="text-[1em] opacity-95 hover:opacity-100 text-white-1">
                             Hello! &nbsp;
                           </span>
-                          {localStorage.getItem("username")}
+                          <span className="dark:text-white-1/75">
+                            {localStorage.getItem("username")}
+                          </span>
                         </h4>
                         <p className="text-[0.8rem] mt-2">
                           Have a great health!!
                         </p>
-                        <button
-                          type="button"
-                          className="mt-4 py-[0.8rem] px-4 rounded-[4px] border-[1px]  transition-all duration-300 hover:text-blue-1 hover:border-blue-5 hover:bg-blue-5 text-blue-1 border-blue-3 mr-[10px] bg-blue-3"
-                          onClick={() => {
-                            setShowDropdown(false);
-                            toggleProfile(true);
-                          }}
-                        >
-                          Profile
-                        </button>
-                        <button
-                          type="button"
-                          className="mt-4 py-[0.8rem] px-4 rounded-[4px] border-[1px]  transition-all duration-300 hover:text-blue-1 hover:border-blue-5 hover:bg-blue-5 text-blue-1 border-blue-3 mr-[10px]"
-                          onClick={() => {
-                            setShowDropdown(false);
-                            localStorage.getItem("usertype") === "doctor"
-                              ? updatestatus()
-                              : userLogout();
-                            navigate("/");
-                          }}
-                        >
-                          Logout
-                        </button>
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          <button
+                            type="button"
+                            className="py-[0.8rem] px-4 rounded-[4px] border-[1px] transition-all duration-300 hover:text-blue-1 hover:border-blue-5 hover:bg-blue-5 text-blue-1 border-blue-3 bg-blue-3"
+                            onClick={() => {
+                              setShowDropdown(false);
+                              toggleProfile(true);
+                            }}
+                          >
+                            Profile
+                          </button>
+                          <button
+                            type="button"
+                            className="py-[0.8rem] px-4 rounded-[4px] border-[1px] transition-all duration-300 hover:text-blue-1 hover:border-blue-5 hover:bg-blue-5 text-blue-1 border-blue-3"
+                            onClick={() => {
+                              setShowDropdown(false);
+                              localStorage.getItem("usertype") === "doctor"
+                                ? updatestatus()
+                                : userLogout();
+                              navigate("/");
+                            }}
+                          >
+                            Logout
+                          </button>
+                        </div>
                       </div>
                     )}
                   </div>

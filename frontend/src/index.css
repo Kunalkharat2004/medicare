@@ -46,7 +46,10 @@ input[type="password"]::-webkit-appearance {
   box-sizing: border-box;
 }
 
-html {
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+  scroll-behavior: smooth;
   font-size: 16px;
   scrollbar-width: thin;
   scrollbar-color: #7584AE, #B0BBD8;
