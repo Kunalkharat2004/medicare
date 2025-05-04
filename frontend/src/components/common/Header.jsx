@@ -127,15 +127,15 @@ const Header = () => {
         )}
       <header
         id=""
-        className={`z-[1000] w-full text-blue-8 md:px-8 pt-6 pb-6 transition-colors duration-0 ease-linear h-full bg-[#f5f5f5] dark:text-white-1 overflow-x-hidden ${
+        className={`z-[1000] w-full text-blue-8 md:px-4 pt-6 pb-6 transition-colors duration-0 ease-linear h-full bg-[#f5f5f5] dark:text-white-1 overflow-x-hidden ${
           isSticky
             ? "top-0 sticky bg-blue-1 dark:bg-black-2"
-            : "dark:bg-black-6 "
+            : "dark:bg-black-6"
         } `}
       >
-        <div className="max-w-[1440px] mx-auto max-sm:px-2 px-6 max-xl:max-w-[1280px] max-lg:max-w-[1024px] max-md:max-w-[768px] max-sm:max-w-full h-full overflow-x-hidden relative">
-          <div className="grid grid-cols-12 md:gap-4 max-sm:w-full">
-            <h2 className="flex items-center col-span-7 max-lg:col-span-5 max-md:col-span-6 max-sm:col-span-6 max-md:mt-1">
+        <div className="max-w-[1440px] mx-auto max-sm:px-2 px-4 max-xl:max-w-[1280px] max-lg:max-w-[1024px] max-md:max-w-[768px] max-sm:max-w-full h-full overflow-x-hidden relative">
+          <div className="flex flex-row justify-between items-center w-full">
+            <div className="flex-shrink-0 max-w-[180px]">
               <Link to="/">
                 <img
                   src={logo}
@@ -143,10 +143,11 @@ const Header = () => {
                   className="w-full md:max-h-[45px] hover:text-blue-9"
                 />
               </Link>
-            </h2>
+            </div>
+
             {!localStorage.getItem("username") && (
-              <div className="col-span-5 flex justify-end gap-4 max-md:col-span-6">
-                <div className="space-x-4 items-center md:flex md:justify-end mt-2">
+              <div className="flex items-center gap-4">
+                <div className="space-x-4 items-center md:flex md:justify-end">
                   <button
                     type="button"
                     onClick={handleLoginClick}
@@ -162,10 +163,10 @@ const Header = () => {
                     Register
                   </button>
                 </div>
-                <div className="rounded-full pt-2 cursor-pointer flex justify-end items-center col-span-1">
+                <div className="cursor-pointer">
                   {isDarkMode ? (
                     <FaSun
-                      className=" w-7 h-7 max-sm:w-6 max-sm:h-6 text-white-1 hidden dark:block bg-blue-3 p-[0.3rem] max-sm:p-1 rounded-full align-middle dark:bg-blue-25 dark:hover:bg-blue-31"
+                      className="w-7 h-7 max-sm:w-6 max-sm:h-6 text-white-1 hidden dark:block bg-blue-3 p-[0.3rem] max-sm:p-1 rounded-full align-middle dark:bg-blue-25 dark:hover:bg-blue-31"
                       onClick={toggleDarkMode}
                     />
                   ) : (
@@ -174,7 +175,6 @@ const Header = () => {
                       onClick={toggleDarkMode}
                     />
                   )}
-                  {/* Sun & Moon Icons */}
                 </div>
               </div>
             )}
@@ -182,13 +182,7 @@ const Header = () => {
             {localStorage.getItem("username") !== null &&
             localStorage.getItem("username") !== undefined ? (
               windowWidth >= 800 ? (
-                <nav
-                  className={`hidden md:flex items-center ${
-                    localStorage.getItem("usertype") == "doctor"
-                      ? "xl:ml-32 lg:gap-6 max-lg:gap-5"
-                      : "gap-5 max-lg:gap-4"
-                  }`}
-                >
+                <div className="flex flex-row items-center justify-end space-x-8 flex-grow ml-8">
                   <div
                     className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 ${
                       curPath === "/home"
@@ -237,9 +231,10 @@ const Header = () => {
                       </span>
                     </div>
                   )}
+
                   {localStorage.getItem("usertype") === "patient" && (
                     <div
-                      className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 min-w-[160px] whitespace-nowrap ${
+                      className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center dark:hover:text-blue-2 min-w-[130px] whitespace-nowrap ${
                         curPath === "/medical-diagnosis"
                           ? "text-blue-9 border-b-[2px] border-blue-9 dark:text-blue-32 dark:border-blue-5"
                           : "dark:text-white-1 text-blue-8"
@@ -290,7 +285,7 @@ const Header = () => {
 
                   {/* Account Dropdown */}
                   <div
-                    className="relative hover:text-blue-9 transition-all duration-300 text-[0.9em] pt-[13px] pb-2 text-blue-8 dark:text-white-1 dark:hover:text-blue-2"
+                    className="relative hover:text-blue-9 transition-all duration-300 text-[0.9em] pt-[13px] pb-2 text-blue-8 dark:text-white-1 dark:hover:text-blue-2 inline-block"
                     ref={dropdownRef}
                   >
                     <span
@@ -342,7 +337,7 @@ const Header = () => {
                       </div>
                     )}
                   </div>
-                  <div className="rounded-full cursor-pointer flex justify-end items-center relative -left-2">
+                  <div className="cursor-pointer flex justify-end items-center">
                     {isDarkMode ? (
                       <FaSun
                         className="w-7 h-7 max-sm:w-6 max-sm:h-6 text-white-1 hidden dark:block bg-blue-8 p-[0.3rem] max-sm:p-1 rounded-full align-middle dark:bg-blue-25 dark:text-white-1"
@@ -355,13 +350,13 @@ const Header = () => {
                       />
                     )}
                   </div>
-                </nav>
+                </div>
               ) : (
-                <div className="col-span-6 flex justify-end items-center mt-2 absolute right-4">
-                  <div className="rounded-full cursor-pointer flex justify-end items-center">
+                <div className="flex justify-end items-center mt-2 z-[101]">
+                  <div className="cursor-pointer">
                     {isDarkMode ? (
                       <FaSun
-                        className=" w-7 h-7 max-sm:w-6 max-sm:h-6 text-white-1  hidden dark:block bg-blue-8 p-[0.3rem] max-sm:p-1 rounded-full align-middle dark:bg-blue-25 dark:text-white-1"
+                        className="w-7 h-7 max-sm:w-6 max-sm:h-6 text-white-1 hidden dark:block bg-blue-8 p-[0.3rem] max-sm:p-1 rounded-full align-middle dark:bg-blue-25 dark:text-white-1"
                         onClick={toggleDarkMode}
                       />
                     ) : (
@@ -389,7 +384,7 @@ const Header = () => {
                       }`}
                       ref={sidebarRef}
                     >
-                      <nav className="absolute flex flex-col top-[30px] right-0 gap-6 bg-blue-1 z-[99] py-4 px-20 rounded-[20px] dark:bg-gray-800">
+                      <nav className="absolute flex flex-col top-[30px] right-0 gap-4 bg-blue-1 z-[99] py-4 px-12 rounded-[20px] dark:bg-gray-800 min-w-[180px]">
                         <div
                           className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center ${
                             curPath === "/home"
@@ -507,10 +502,10 @@ const Header = () => {
                         </div>
 
                         <div
-                          className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center text-blue-8 dark:text-white-1`}
+                          className={`hover:text-blue-9 content-none transition-all duration-300 text-[0.9em] pt-[13px] pb-2 inline-flex items-center text-blue-8 dark:text-white-1 w-full`}
                         >
                           <span
-                            className="font-bold text-center w-full"
+                            className="font-bold text-center w-full cursor-pointer"
                             onClick={() => {
                               setSideBarOpen(false);
                               setShowDropdown(true);
